@@ -28,20 +28,20 @@ for image_number = 1:number_of_images;
   for x = 1 : subareas_count_x
     for y = 1 : subareas_count_y
       tmp = cell2mat(image_subareas(x,y));
-      
-      quartile_deviation = quartileDeviation(tmp);
-      quartile_deviations(x,y) = quartile_deviation;  
+       
+      #quartile_deviation = quartileDeviation(image_to_proccess, tmp);
+      #quartile_deviations(x,y) = quartile_deviation;  
       
       deviation = customDeviation(image_to_proccess, tmp);
       deviations(x,y) = deviation;
       
       entropy_var = customEntropy(image_to_proccess, tmp);
-      entropies(x, y) = entropy_var/entropy_isolated;
+      entropies(x, y) = entropy_var;
     end
   end
   
-    scatter(quartile_deviations, entropies);
-    hold on;
+  scatter(deviations, entropies);
+  hold on;
 end
 
 ##xlabel ("quartile deviations");
