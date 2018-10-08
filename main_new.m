@@ -1,10 +1,10 @@
 lines_start = 1;
-lines_skip = 10;
+lines_skip = 5;
 lines_end = 140;
 
 load("nbss.mat");
 data = vbss;
-data = data(1:4, 1:600, lines_start: lines_end);
+data = data(1:4, : , :);
 data = normalize(data);  
 
 for image_number = 1:4;
