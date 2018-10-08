@@ -4,7 +4,7 @@ lines_end = 140;
 
 load("nbss.mat");
 data = vbss;
-data = data(1:4, : , :);
+data = data(1:4, : , 1:140);
 data = normalize(data);  
 
 for image_number = 1:4;
@@ -19,20 +19,20 @@ for image_number = 1:4;
   v_var = var(x);
   v_skewness  = skewness(x);
 
-  plot(lines_start:lines_skip:lines_end, v_avg, 'color', 'red');
+  x_axis = lines_start:lines_skip:lines_end;
+  plot(x_axis, v_avg, 'color', 'red');
   hold on;
-  plot(lines_start:lines_skip:lines_end, v_std, 'color', 'blue');
+  plot(x_axis, v_std, 'color', 'blue');
   hold on;
-  plot(lines_start:lines_skip:lines_end, v_max, 'color', 'green');
+  plot(x_axis, v_max, 'color', 'green');
   hold on;
-  plot(lines_start:lines_skip:lines_end, v_min, 'color', 'black');
+  plot(x_axis, v_min, 'color', 'black');
   hold on;
-  plot(lines_start:lines_skip:lines_end, v_var, 'color', 'cyan');
+  plot(x_axis, v_var, 'color', 'cyan');
   hold on;
-  plot(lines_start:lines_skip:lines_end, v_skewness, 'color', 'yellow');
+  plot(x_axis, v_skewness, 'color', 'yellow');
   
-  legend('avg','std','max','min','var','skewness') 
-  
+  legend('avg','std','max','min','var','skewness')   
   figure();
 end
 
