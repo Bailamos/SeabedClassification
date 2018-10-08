@@ -8,8 +8,9 @@ function retval = customEntropy (I, subImage)
   for point_no = 1 : subImage_size
       point = subImage(point_no);
       [min_val, index] = min(abs(x-point));
-      P += counts(index) / image_size;
+      P = [P, counts(index) / image_size];
   end
-  
-  retval = P;
+  P(P==0) = []
+  retval = -sum (P .* log2 (P));
+  #retval = P;
 endfunction

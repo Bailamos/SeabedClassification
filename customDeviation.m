@@ -3,7 +3,7 @@ function retval = customDeviation (I, subImage)
   
   D = (subImage - avg).^2;
   
-  deviation = sqrt(sum(subImage(:)) /  size(subImage(:))(1));
+  deviation = sqrt(sum(D) /  size(subImage(:))(1));
   
   retval = deviation;
 endfunction

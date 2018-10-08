@@ -24,18 +24,22 @@ for image_number = 1:number_of_images;
   
   #dla kazdego podobrazka oblicz odchylenie cwiartkowe i entropie
   [subareas_count_x, subareas_count_y] = size(image_subareas);
-  
+  entropy_var2 = entropyfilt(image_to_proccess);
   for x = 1 : subareas_count_x
     for y = 1 : subareas_count_y
       tmp = cell2mat(image_subareas(x,y));
        
       #quartile_deviation = quartileDeviation(image_to_proccess, tmp);
       #quartile_deviations(x,y) = quartile_deviation;  
+
+      #deviation = customDeviation(image_to_proccess, tmp);
+      #deviation = customDeviation(image_to_proccess, tmp(:));
+      deviations(x,y) = std(tmp(:));
       
-      deviation = customDeviation(image_to_proccess, tmp);
-      deviations(x,y) = deviation;
-      
-      entropy_var = customEntropy(image_to_proccess, tmp);
+      #entropy_var = customEntropy(image_to_proccess, tmp);
+      #entropy_var = entropyfilt(image_to_proccess);
+      #entropy_var = sum(entropy_var2(x + (x * 10 - 10) : 10 * x, x + (x * 10 - 10) : 10 * x)(:));
+      entropy_var = entropy_var2(x * 5, y * 5);
       entropies(x, y) = entropy_var;
     end
   end
