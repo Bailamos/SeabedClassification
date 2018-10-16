@@ -7,7 +7,7 @@ x_axis = lines_start:lines_skip:lines_end;
 load("nbss.mat");
 data = vbss;
 data = data(1:4, : , 1:140);
-data = normalize(data);  
+data = customNormalize(data);  
 
 for image_number = 1:4;
 
