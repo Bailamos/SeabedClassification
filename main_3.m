@@ -12,40 +12,44 @@ for image_number = 1:4;
   x = squeeze(x)';
 
   #max
-  [v_max, v_max_position] = max(x);
+  [v_max, v_max_position] = max(x');
   
-##  plot(x(:,1));
+##  plot(x(1,:));
 ##  hold on;
 ##  plot(v_max_position(1), v_max(1), 'r*');
 
   #nachylenie z maxa do punktu oddalonego o +10
   m_p = [];
-  for line_number = 1:600;  
+  for line_number = 1:140;  
+    
+    end_position = v_max_position + 1;
+    end_position(end_position > 600) -= 2;
+    
     m_p = [m_p; 
       polyfit(
-      [v_max_position(line_number), v_max_position(line_number) + 10], 
-      [v_max(line_number), x(v_max_position(line_number) + 10, line_number)], 1)
+      [v_max_position(line_number), end_position(line_number)], 
+      [v_max(line_number), x(line_number, end_position(line_number))], 1)
     ];
       
-##    if line_number == 500
-##      plot(x(:,line_number));
+##    if line_number == 100
+##      plot(x(line_number,:));
 ##      hold on;
 ##      plot(v_max_position(line_number), v_max(line_number), 'r*');
-##      plot(v_max_position(line_number) + 10, x(v_max_position(line_number) + 10, line_number), 'g*');
+##      plot(v_max_position(line_number) + 1, x(line_number, end_position(line_number)), 'g*');
 ##    end
   endfor
   
   #korelacja
   v_corr = [];
-  for line_number = 1:600;
-    cor_tmp = xcorr(x(:, line_number),'coeff');
-    v_corr = [v_corr; polyfit([cor_tmp(140); cor_tmp(145)],[140;145], 1)];
+  for line_number = 1:140;
+    cor_tmp = xcorr(x(line_number, :),'coeff');
+    v_corr = [v_corr; polyfit([cor_tmp(600); cor_tmp(605)],[600;605], 1)];
     
 ##   if line_number == 1
 ##     plot(cor_tmp);
 ##     hold on;
-##     plot(140, 1, 'r*');
-##     plot(145, cor_tmp(145), 'g*');
+##     plot(600, 1, 'r*');
+##     plot(700, cor_tmp(700), 'g*');
 ##     figure();
 ##   end
   endfor
