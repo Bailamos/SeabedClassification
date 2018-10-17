@@ -6,6 +6,10 @@ data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
 
+maksy = []
+nachylenia = [];
+nachylenia_korelacji = [];
+kolory = ['r';'g';'b';'y'];
 for image_number = 1:4;
   image_number
   x = data(image_number, :, :);
@@ -54,11 +58,36 @@ for image_number = 1:4;
 ##   end
   endfor
  
+  maksy = [maksy; v_max];
+  nachylenia = [nachylenia; m_p(:,1)'];
+  nachylenia_korelacji = [nachylenia_korelacji; v_corr(:,1)'];
   
-  scatter3(v_max, m_p(:,1), v_corr(:,1));
+  scatter3(v_max, m_p(:,1), v_corr(:,1), kolory(image_number));
   hold on;
 endfor
-
+  
 xlabel('max');
 ylabel('m');
 zlabel('mcorr');
+
+classes = minimumDistanceClassCreate(maksy, nachylenia, nachylenia_korelacji);
+scatter3(classes(1, 1),classes(1, 2),classes(1, 3), ...
+        'MarkerEdgeColor','r',...
+        'MarkerFaceColor','r');
+scatter3(classes(2, 1),classes(2, 2),classes(2, 3), ...
+        'MarkerEdgeColor','g',...
+        'MarkerFaceColor','g');
+scatter3(classes(3, 1),classes(3, 2),classes(3, 3),...
+        'MarkerEdgeColor','b',...
+        'MarkerFaceColor','b');
+scatter3(classes(4, 1),classes(4, 2),classes(4, 3),...
+        'MarkerEdgeColor','y',...
+        'MarkerFaceColor','y');
+figure()
+
+dane = [maksy(:), nachylenia(:), nachylenia_korelacji(:)];
+kwalifikacja = [];
+for point = 1:560
+  kwalifikacja = [kwalifikacja, minimumDistanceClassQualification(classes, dane(point, :))];
+endfor
+
