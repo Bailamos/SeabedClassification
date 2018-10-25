@@ -9,7 +9,7 @@ odleglosc = 70;
 load("nbss.mat");
 data = vbss;
 data = data(1:4, : , 1:140);
-data = normalize(data);  
+data = customNormalize(data);  
 colors = ['blue'; 'yellow'; 'green'; 'red'];
 nachylenie_maxa = [];
 nachylenie_korelacji = [];

@@ -1,10 +1,16 @@
 clear;
 SLOPE_OFFSET = 10;
-
+CORR_BEG = 40;
+CORR_END = 100;
+CORR_COUNT = ((CORR_END - CORR_BEG) * 2) + 1;
+CORR_MID = (CORR_COUNT - 1)/ 2 + 1;
+CORR_TO = CORR_MID + 60;
+#dobre +60
 load("nbss.mat");
 data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
+
 
 for image_number = 1:4;
   image_number
@@ -19,13 +25,21 @@ for image_number = 1:4;
 ##  plot(v_max_position(1), v_max(1), 'r*');
 
   #nachylenie z maxa do punktu oddalonego o +10
+  entropies = entropyfilt(x,[1 1 1; 1 1 1; 1 1 1]);
   m_p = [];
-  for line_number = 1:600;  
-    m_p = [m_p; 
-      polyfit(
-      [v_max_position(line_number), v_max_position(line_number) + 10], 
-      [v_max(line_number), x(v_max_position(line_number) + 10, line_number)], 1)
-    ];
+  for line_number = 1:600; 
+##    line_data = x(:, line_number);
+##    line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
+##    [maxv, max_pos] = max(line_data);
+##    m_p = [m_p; 
+##      polyfit(
+##      [max_pos, max_pos + 10], 
+##      [maxv, line_data(v_max_position(line_number) + 10)], 1)
+##    ];
+##      m_p = [m_p; std(x(40:100, line_number))];
+##        m_p = [m_p; skewness(x(:, line_number))];
+##      m_p = [m_p; entropy(x(:,line_number))];
+        m_p = [m_p; sum(entropies(:,line_number))];
       
 ##    if line_number == 500
 ##      plot(x(:,line_number));
@@ -38,14 +52,17 @@ for image_number = 1:4;
   #korelacja
   v_corr = [];
   for line_number = 1:600;
-    cor_tmp = xcorr(x(:, line_number),'coeff');
-    v_corr = [v_corr; polyfit([cor_tmp(140); cor_tmp(145)],[140;145], 1)];
+    line_data = x(:, line_number);
+    line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
+    cor_tmp = line_data(CORR_BEG:CORR_END);
+    cor_tmp = xcorr(cor_tmp, 'coeff');
+    v_corr = [v_corr; polyfit([cor_tmp(CORR_MID); cor_tmp(CORR_TO)],[CORR_MID; CORR_TO], 1)];
     
 ##   if line_number == 1
 ##     plot(cor_tmp);
 ##     hold on;
-##     plot(140, 1, 'r*');
-##     plot(145, cor_tmp(145), 'g*');
+##     plot(CORR_MID, 1, 'r*');
+##     plot(CORR_TO, cor_tmp(CORR_TO), 'g*');
 ##     figure();
 ##   end
   endfor
@@ -57,4 +74,4 @@ endfor
 
 xlabel('max');
 ylabel('m');
-zlabel('mcorr');
+zlabel('v_corr');
