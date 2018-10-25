@@ -7,13 +7,10 @@ CORR_MID = (CORR_COUNT - 1)/ 2 + 1;
 CORR_TO = CORR_MID + 60;
 ENTROPY_NEIGHBOUR = [1 1 1; 1 1 1; 1 1 1];
 
-#dobre +60
 load("nbss.mat");
 data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
-
-
 
 for image_number = 1:4;
   image_number
