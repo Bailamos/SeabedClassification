@@ -5,11 +5,14 @@ CORR_END = 100;
 CORR_COUNT = ((CORR_END - CORR_BEG) * 2) + 1;
 CORR_MID = (CORR_COUNT - 1)/ 2 + 1;
 CORR_TO = CORR_MID + 60;
+ENTROPY_NEIGHBOUR = [1 1 1; 1 1 1; 1 1 1];
+
 #dobre +60
 load("nbss.mat");
 data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
+
 
 
 for image_number = 1:4;
@@ -25,9 +28,11 @@ for image_number = 1:4;
 ##  plot(v_max_position(1), v_max(1), 'r*');
 
   #nachylenie z maxa do punktu oddalonego o +10
-  entropies = entropyfilt(x,[1 1 1; 1 1 1; 1 1 1]);
+  entropies = entropyfilt(x, ENTROPY_NEIGHBOUR);
   m_p = [];
   for line_number = 1:600; 
+      m_p = [m_p; sum(entropies(:,line_number))];
+      
 ##    line_data = x(:, line_number);
 ##    line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
 ##    [maxv, max_pos] = max(line_data);
@@ -38,9 +43,7 @@ for image_number = 1:4;
 ##    ];
 ##      m_p = [m_p; std(x(40:100, line_number))];
 ##        m_p = [m_p; skewness(x(:, line_number))];
-##      m_p = [m_p; entropy(x(:,line_number))];
-        m_p = [m_p; sum(entropies(:,line_number))];
-      
+##      m_p = [m_p; entropy(x(:,line_number))];     
 ##    if line_number == 500
 ##      plot(x(:,line_number));
 ##      hold on;
@@ -68,10 +71,10 @@ for image_number = 1:4;
   endfor
  
   
-  scatter3(v_max, m_p(:,1), v_corr(:,1));
+  scatter3(v_max, m_p(:), v_corr(:,1));
   hold on;
 endfor
 
 xlabel('max');
-ylabel('m');
-zlabel('v_corr');
+ylabel('entropia');
+zlabel('nachylenie korelacji');
