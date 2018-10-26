@@ -4,9 +4,9 @@ CORR_BEG = 40;
 CORR_END = 100;
 CORR_COUNT = ((CORR_END - CORR_BEG) * 2) + 1;
 CORR_MID = (CORR_COUNT - 1)/ 2 + 1;
-CORR_TO = CORR_MID + 60;
+CORR_TO = CORR_MID + 10;
 ENTROPY_NEIGHBOUR = [1 1 1; 1 1 1; 1 1 1];
-
+colors = ["blue"; "green"; "yellow"; "red"];
 load("nbss.mat");
 data = vbss;
 data = data(:, : , 1:140);
@@ -56,7 +56,7 @@ for image_number = 1:4;
     line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
     cor_tmp = line_data(CORR_BEG:CORR_END);
     cor_tmp = xcorr(cor_tmp, 'coeff');
-    v_corr = [v_corr; polyfit([cor_tmp(CORR_MID); cor_tmp(CORR_TO)],[CORR_MID; CORR_TO], 1)];
+    v_corr = [v_corr; polyfit([CORR_MID; CORR_TO],[cor_tmp(CORR_MID); cor_tmp(CORR_TO)], 1)];
     
 ##   if line_number == 1
 ##     plot(cor_tmp);
@@ -68,7 +68,7 @@ for image_number = 1:4;
   endfor
  
   
-  scatter3(v_max, m_p(:), v_corr(:,1));
+  scatter3(v_max, m_p(:),v_corr(:,1),colors(image_number));
   hold on;
 endfor
 
