@@ -5,4 +5,4 @@ function retval = classNNCalculate (dataSet)
   z = mean(dataSet(:,3));
   
   retval = [x, y, z];
-endfunction
+end

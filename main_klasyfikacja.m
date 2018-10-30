@@ -1,11 +1,12 @@
 clear;
-colors = ["blue"; "green"; "yellow"; "red"];
-#colors2 = [[0 0 0.5]; [0 0.5 0]; [0.5 0.5 0]; [0.5 00]];
-load("nbss.mat");
+colors = ['b'; 'g'; 'y'; 'r'];
+colors2 = ['r'; 'k'; 'c'; 'm'];
+%colors2 = [[0 0 0.5]; [0 0.5 0]; [0.5 0.5 0]; [0.5 00]];
+load('nbss.mat');
 data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
-
+figure();
 learning_set = data(:,1:200,:);
 verifying_set = data(:,201:600,:);
 
@@ -15,7 +16,7 @@ for i = 1 : 4
   
   classification_params(i,:,:) = current_params;  
   nn_classes = [nn_classes; classNNCalculate(current_params)];
-endfor
+end
 
 for i = 1 : 4
   s1 = scatter3(...
@@ -24,7 +25,7 @@ for i = 1 : 4
     classification_params(i,:,3), colors(i));       
   hold on;
  
-endfor
+end
 
 scatter3(...
   nn_classes(:,1),...
@@ -33,11 +34,11 @@ scatter3(...
 
 hold on;
   
-#testing section
+%testing section
 for i = 1 : 4
   current_verifying_params = classificationParams(verifying_set(i,:,:));  
   v_classification_params(i,:,:) = current_verifying_params;   
-endfor
+end
 
 for i = 1 : 4
   prompt = 'Click to continue';
@@ -49,4 +50,4 @@ for i = 1 : 4
     v_classification_params(i,:,3), colors(i));       
   hold on;
 
-endfor
+end

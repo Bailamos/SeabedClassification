@@ -19,15 +19,15 @@ function retval = classificationParams (dataSet)
   ventropy = [];
   correlation = [];
   for line_number = 1:DATA_COUNT;
-    ventropy = [ventropy; mean(entropies(:, line_number))];
-    #ventropy = [ventropy; entropy(x(:,line_number))];
+    ventropy = [ventropy; sum(entropies(:, line_number))];
+    %ventropy = [ventropy; entropy(x(:,line_number))];
       
     line_data = x(:, line_number);
-    #line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
+    %line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
     cor_tmp = line_data(CORR_BEG:CORR_END);
     cor_tmp = xcorr(cor_tmp, 'coeff');
     correlation = [correlation; polyfit([CORR_MID; CORR_TO],[cor_tmp(CORR_MID); cor_tmp(CORR_TO)], 1)];
-  endfor
+  end
           
   retval = [vmax', ventropy, correlation(:,1)];
-endfunction
+end
