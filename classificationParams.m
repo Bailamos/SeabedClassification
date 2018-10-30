@@ -14,8 +14,9 @@ function retval = classificationParams (dataSet)
     
   vmax = max(x);
     
+  #change second I in entropyfilt retval to zeros(size(I));
   entropies = entropyfilt(x, ENTROPY_NEIGHBOUR);
-          
+   
   ventropy = [];
   correlation = [];
   for line_number = 1:DATA_COUNT;
