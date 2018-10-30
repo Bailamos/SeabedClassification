@@ -20,33 +20,15 @@ for image_number = 1:4;
   #max
   [v_max, v_max_position] = max(x);
   
-##  plot(x(:,1));
-##  hold on;
-##  plot(v_max_position(1), v_max(1), 'r*');
-
+  ##plot(x(:,1));
+  ##hold on;
+  ##plot(v_max_position(1), v_max(1), 'r*');
+  
   #nachylenie z maxa do punktu oddalonego o +10
   entropies = entropyfilt(x, ENTROPY_NEIGHBOUR);
   m_p = [];
   for line_number = 1:600; 
-      m_p = [m_p; sum(entropies(:,line_number))];
-      
-##    line_data = x(:, line_number);
-##    line_data = (line_data - min(line_data)) / (max(line_data) - min(line_data));
-##    [maxv, max_pos] = max(line_data);
-##    m_p = [m_p; 
-##      polyfit(
-##      [max_pos, max_pos + 10], 
-##      [maxv, line_data(v_max_position(line_number) + 10)], 1)
-##    ];
-##      m_p = [m_p; std(x(40:100, line_number))];
-##        m_p = [m_p; skewness(x(:, line_number))];
-##      m_p = [m_p; entropy(x(:,line_number))];     
-##    if line_number == 500
-##      plot(x(:,line_number));
-##      hold on;
-##      plot(v_max_position(line_number), v_max(line_number), 'r*');
-##      plot(v_max_position(line_number) + 10, x(v_max_position(line_number) + 10, line_number), 'g*');
-##    end
+      m_p = [m_p; sum(entropies(:, line_number))];   
   endfor
   
   #korelacja
