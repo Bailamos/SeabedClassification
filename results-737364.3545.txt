@@ -1,0 +1,24 @@
+Rezultat klasyfikacji dna pierwszego:
+Poprawnie sklasyfikowane 353
+ Zklasyfikowane jako dno drugie 17
+ Zklasyfikowane jako dno trzecie 30
+ Zklasyfikowane jako dno czwarte 0
+ Poprawnosc 0.8825
+Rezultat klasyfikacji dna drugiego:
+Poprawnie sklasyfikowane 306
+ Zklasyfikowane jako dno pierwsze 91
+ Zklasyfikowane jako dno trzecie 3
+ Zklasyfikowane jako dno czwarte 0
+ Poprawnosc 0.765
+Rezultat klasyfikacji dna trzeciego:
+Poprawnie sklasyfikowane 243
+ Zklasyfikowane jako dno pierwsze 6
+ Zklasyfikowane jako dno drugie 2
+ Zklasyfikowane jako dno czwarte 149
+ Poprawnosc 0.6075
+Rezultat klasyfikacji dna czwartego:
+Poprawnie sklasyfikowane 306
+ Zklasyfikowane jako dno pierwsze 0
+ Zklasyfikowane jako dno drugie 2
+ Zklasyfikowane jako dno czwarte 92
+ Poprawnosc 0.765

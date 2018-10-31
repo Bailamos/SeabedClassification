@@ -7,6 +7,8 @@ function retval = classificationParams (dataSet)
   CORR_COUNT = ((CORR_END - CORR_BEG) * 2) + 1;
   CORR_MID = (CORR_COUNT - 1)/ 2 + 1;
   CORR_TO = CORR_MID + 60;
+  ENTROPY_BEG = 40;
+  ENTROPY_END = 100;
   ENTROPY_NEIGHBOUR = [1 1 1; 1 1 1; 1 1 1];
   
   x = dataSet;
@@ -15,7 +17,7 @@ function retval = classificationParams (dataSet)
   vmax = max(x);
     
   #change second I in entropyfilt retval to zeros(size(I));
-  entropies = entropyfilt(x, ENTROPY_NEIGHBOUR);
+  entropies = entropyfilt(x(ENTROPY_BEG:ENTROPY_END,:), ENTROPY_NEIGHBOUR);
    
   ventropy = [];
   correlation = [];
