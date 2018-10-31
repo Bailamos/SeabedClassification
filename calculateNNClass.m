@@ -1,4 +1,4 @@
-function retval = classNNCalculate (dataSet)
+function retval = calculateNNClass (dataSet)
 
   x = mean(dataSet(:,1));
   y = mean(dataSet(:,2));

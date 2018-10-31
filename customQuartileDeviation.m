@@ -1,4 +1,4 @@
-function retval = quartileDeviation(Image)
+function retval = customQuartileDeviation(Image)
   
   q1 = quantile(Image, 0.25);
   q3 = quantile(Image, 0.75);
