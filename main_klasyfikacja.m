@@ -17,9 +17,9 @@ for i = 1 : 4
 endfor
 
 
-#plotClassificationData(classification_params, colors);
-#figure();
-#plotClasses(nn_classes, colors);
+plotClassificationData(classification_params, colors);
+figure();
+plotClasses(nn_classes, colors);
 
 #testing section
 for i = 1 : 4
@@ -48,12 +48,7 @@ for i = 1 : 4
   classification_result(i,:) = classes;
   current_test_classification_params = [current_test_classification_params, classes];
   
-  #plotTestData(current_test_classification_params, colors);
+  plotTestData(current_test_classification_params, colors);
 endfor
 
-
-
-#figure();
-#plotClassificationData(test_classification_params, colors);
-
-#saveClassificationResultsToFile(classification_result);
+saveClassificationResultsToFile(classification_result);
