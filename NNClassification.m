@@ -1,8 +1,7 @@
-function retval = NNClassification (test_set, classification_params, nn_classes, colors)
-
-  plotClassificationData(classification_params, colors);
+function retval = NNClassification (test_set, classification_params, nn_classes, colors) 
   figure();
   plotClasses(nn_classes, colors);
+  
   for i = 1 : 4
     test_classification_params(i,:,:) = calculateClassificationParams(test_set(i,:,:));  
     current_test_classification_params = squeeze(test_classification_params(i,:,:));  

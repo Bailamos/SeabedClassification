@@ -16,6 +16,6 @@ for i = 1 : 4
   nn_classes = [nn_classes; calculateNNClass(squeeze(classification_params(i,:,:)))];
 endfor
 
-
+plotClassificationData(classification_params, colors);
 #testing section
 NNClassification(test_set, classification_params, nn_classes, colors);
