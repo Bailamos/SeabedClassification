@@ -1,4 +1,4 @@
-function retval = NNClassification (test_set, classification_params, nn_classes, colors) 
+function retval = NNClassification (test_set, nn_classes, colors) 
   figure();
   plotClasses(nn_classes, colors);
   

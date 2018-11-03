@@ -4,7 +4,7 @@ function retval = NNWMClassification (test_set, nnwm_classes, colors)
       test_classification_params(i,:,:) = calculateClassificationParams(test_set(i,:,:));  
       current_test_classification_params = squeeze(test_classification_params(i,:,:));  
     
-      for j = 1 : 300
+      for j = 1 : 400
         distance_1 = min(distanceBetweenPointsBulk(...
                         current_test_classification_params(j,:),
                         squeeze(nnwm_classes(1,:,:))));
