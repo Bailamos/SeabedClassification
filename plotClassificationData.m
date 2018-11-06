@@ -6,7 +6,14 @@ function retval = plotClassificationData (data, colors)
       data(i,:,3), colors(i));       
     hold on;
   endfor
-  xlabel('max');
-  ylabel('entropy');
-  zlabel('nachylenie korelacji');
+  xlabel('wartosc maksymalna');
+  ylabel('entropia');
+  zlabel('nachylenie autokorelacji');
+  legend ({"mul",...
+    "antropogeniczy piasek i mul",...
+    "piasek drobnoziarnisty",...
+    "piasek gruboziarnisty"});
+  legend show;
+  title ("Rozklad dla paraemtrow: entropia, wartosc maksymalna oraz nacyhlenie autokorelacji");
+  view(-100,30)
 endfunction

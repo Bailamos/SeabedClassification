@@ -6,7 +6,7 @@ data = vbss;
 data = data(:, : , 1:140);
 data = customNormalize(data);  
 
-learning_set = data(:,1:200,:);
+learning_set = data(:,1:600,:);
 test_set = data(:,201:600,:);
 
 nn_classes = [];
@@ -18,7 +18,7 @@ endfor
 
 nnwm_classes = classification_params;
 
-#plotClassificationData(classification_params, colors);
+plotClassificationData(classification_params, colors);
 #testing section
 #NNClassification(test_set, nn_classes, colors);
-NNWMClassification(test_set, nnwm_classes, colors);
+#NNWMClassification(test_set, nnwm_classes, colors);
