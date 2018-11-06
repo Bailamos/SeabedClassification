@@ -16,14 +16,19 @@ function retval = plotClassificationData (data, colors)
   legend show;
   title (["Rozklad dla parametrow:"...
          "entropia, wartosc maksymalna oraz nacyhlenie autokorelacji"]);
-  view(-100,30)
+  
+  #izometryczny
+  view(-100,30)  
   print -djpg izmometryczny.jpg
+  
   #entropia/naychlenie
   #view(90,0)
   #print -djpg rzut1.jpg
+  
   #entropia/wartosc maksymalna
   #view(0,90)
   #print -djpg rzut2.jpg
+  
   #nacyhlenie/wartosc maksymalna 
   #view(0,0)
   #print -djpg rzut3.jpg
